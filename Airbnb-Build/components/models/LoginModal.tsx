@@ -42,38 +42,33 @@ function LoginModal({}: Props) {
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    setIsLoading(true);
-
-    // signIn("credentials", {
-    //   ...data,
-    //   redirect: false,
-    // }).then((callback) => {
-    //   setIsLoading(false);
-
-      axios
-      .post("https://airbnb-clone-lf3e.onrender.com/api/v1/auth/login", data)
-      .then(() => {
+  const onSubmit: SubmitHandler<FieldValues> = async(data) => {
+    try {
+      const res = await axios.post("https://airbnb-clone-lf3e.onrender.com/api/v1/auth/login", data);
+      
+      console.log(res.data.token);
+      
+      const token = res.data.token;
+      
+      // Save token to localStorage
+      if (token) {
+        localStorage.setItem("authToken", token);
         toast.success("Login Successfully");
-              router.refresh();
-              loginModel.onClose();
-      })
-      .catch((err: any) => toast.error("Something Went Wrong"))
-      .finally(() => {
-        setIsLoading(false);
-        // toast.success("Register Successfully");
-      });
+        
+        // Refresh the page or perform other actions
+        router.refresh();
+        loginModel.onClose();
+      } else {
+        toast.error("Failed to retrieve token.");
+      }
+    } catch (err: any) {
+      toast.error("Something Went Wrong");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  //     if (callback?.ok) {
-  //       toast.success("Login Successfully");
-  //       router.refresh();
-  //       loginModel.onClose();
-  //     } else if (callback?.error) {
-  //       toast.error("Something Went Wrong");
-  //     }
-  //   });
-  // };
+ 
 
   const toggle = useCallback(() => {
     loginModel.onClose();
