@@ -25,7 +25,7 @@ app.use(morgan("dev"));
 app.use("/api/v1/auth", authRoutes); 
 //rest api
 app.get("/", (req, res) => {
-  res.send("<h1>Welcome to Time Zone</h1>");
+  res.send("<h1>Welcome to Airbnb Backend it is working fine</h1>");
 });
 
 //PORT
