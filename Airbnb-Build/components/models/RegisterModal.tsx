@@ -65,7 +65,7 @@ function RegisterModal({}: Props) {
   }, [loginModel, registerModel]);
 
   const bodyContent = (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 w-full">
       <Heading
         title="Welcome to Airbnb-Clone"
         subtitle="Create an Account!"

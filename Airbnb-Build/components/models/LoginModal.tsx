@@ -25,11 +25,11 @@ function LoginModal({}: Props) {
   const [showDialog, setShowDialog] = useState(false);
 
   const handleButtonClick = () => {
-    setShowDialog(true); 
+    setShowDialog(true);
   };
 
   const closeDialog = () => {
-    setShowDialog(false); 
+    setShowDialog(false);
   };
   const {
     register,
@@ -42,19 +42,22 @@ function LoginModal({}: Props) {
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = async(data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
-      const res = await axios.post("https://airbnb-clone-lf3e.onrender.com/api/v1/auth/login", data);
-      
+      const res = await axios.post(
+        "https://airbnb-clone-lf3e.onrender.com/api/v1/auth/login",
+        data
+      );
+
       console.log(res.data.token);
-      
+
       const token = res.data.token;
-      
+
       // Save token to localStorage
       if (token) {
         localStorage.setItem("authToken", token);
         toast.success("Login Successfully");
-        
+
         // Refresh the page or perform other actions
         router.refresh();
         loginModel.onClose();
@@ -68,15 +71,13 @@ function LoginModal({}: Props) {
     }
   };
 
- 
-
   const toggle = useCallback(() => {
     loginModel.onClose();
     registerModel.onOpen();
   }, [loginModel, registerModel]);
 
   const bodyContent = (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 w-full">
       <Heading title="Welcome Back" subtitle="Login to your Account!" center />
       <Input
         id="email"
@@ -106,7 +107,7 @@ function LoginModal({}: Props) {
         icon={FcGoogle}
         onClick={handleButtonClick}
       />
-    <Button
+      <Button
         outline
         label="Continue with Facebook"
         icon={AiFillFacebook}
@@ -119,9 +120,7 @@ function LoginModal({}: Props) {
         <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-96 text-center">
             <h2 className="text-xl font-semibold mb-4">Login</h2>
-            <p className="text-gray-700 mb-4">
-              It will be in production soon.
-            </p>
+            <p className="text-gray-700 mb-4">It will be in production soon.</p>
             <button
               className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
               onClick={closeDialog}
