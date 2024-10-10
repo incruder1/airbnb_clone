@@ -112,7 +112,7 @@ function Categories({}: Props) {
 
   return (
     <Container>
-      <div className="pt-4 flex flex-row items-center justify-between overflow-x-auto">
+      <div className="pt-4 flex flex-row items-center justify-between overflow-x-hidden">
         {categories.map((items, index) => (
           <CategoryBox
             key={index}
