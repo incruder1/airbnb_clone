@@ -52,7 +52,7 @@ function LoginModal({}: Props) {
     //   setIsLoading(false);
 
       axios
-      .post("http://localhost:8080/api/v1/auth/login", data)
+      .post("https://airbnb-clone-lf3e.onrender.com/api/v1/auth/login", data)
       .then(() => {
         toast.success("Login Successfully");
               router.refresh();

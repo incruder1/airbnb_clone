@@ -46,7 +46,7 @@ function RegisterModal({}: Props) {
     setIsLoading(true);
 
     axios
-      .post("http://localhost:8080/api/v1/auth/register", data)
+      .post("https://airbnb-clone-lf3e.onrender.com/api/v1/auth/register", data)
       .then(() => {
         loginModel.onOpen();
         registerModel.onClose();
